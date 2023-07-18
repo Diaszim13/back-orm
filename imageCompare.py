@@ -3,6 +3,17 @@ from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_i
 from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
+import mysql.connector as connector
+
+con = connector.connect(host='localhost',database='helius-dev',user='root',password='')
+
+if con.is_connected():
+    db_info = con.get_server_info()
+    print("Connected to server " , db_info);
+    cursor = con.cursor()
+    cursor.execute("SELECT database();");
+    linha = cursor.fetchone()
+    print("Connected ao banco " , linha);
 
 
 # Carregando o modelo MobileNet pré-treinado
@@ -36,7 +47,12 @@ for image_file in os.listdir(test_image_path):
 distances = []
 for ref_features in reference_features:
     distance = np.linalg.norm(ref_features - test_features)
+    insert_query = 'INSERT INTO photo(size, name, precisao, pecaId) values(00, "name", %s, 1)';
+    data = str(distance)
+    cursor.execute(insert_query, [data]);
+    con.commit()
     distances.append(distance)
+
 
 # Resultados
 min_distance_index = np.argmin(distances)

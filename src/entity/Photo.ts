@@ -12,6 +12,8 @@ export class Photo {
     @Column()
     name!: string
 
+    @Column()
+    precisao!: number
 
     @ManyToOne(() => Peca, (peca) => peca.photo)
     peca!: Peca

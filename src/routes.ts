@@ -27,7 +27,7 @@ export const Routes = [{
         method: "get",
         route: "/pdf",
         controller: PdfController,
-        action: "all"
+        action: "pdf"
     },
 
     //pecas
