@@ -62,7 +62,7 @@ export class PdfController {
             y+=30;
         });
 
-        const filePath = await path.join(__dirname, "photos.pdf");
+        const filePath = await path.join(__dirname, "photos.0pdf");
         const writeStream = fs.createWriteStream(filePath);
         
         doc.pipe(writeStream);
