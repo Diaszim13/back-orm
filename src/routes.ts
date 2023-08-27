@@ -36,5 +36,11 @@ export const Routes = [{
         route: '/getpecas',
         controller: PecasController,
         action: 'all'
+    },
+    {
+        method: 'post',
+        route: '/savePeca',
+        controller: PecasController,
+        action: 'save'
     }
 ]
